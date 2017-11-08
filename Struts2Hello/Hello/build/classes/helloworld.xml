@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN" "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts> 
+<package name="default" namespace="/" extends="struts-default">
+		<default-action-ref name="errorindex"></default-action-ref>		
+		<!--  struts2.5为了安全性增加的配置 .要注意-->
+		<global-allowed-methods>regex:.*</global-allowed-methods>
+		
+		<action name="errorindex" >
+			<result>/error.jsp</result>				
+		</action>
+			
+		
+		<!-- 1 通配符的方式 -->
+		<action name="hello_*" method="{1}"  class="com.imooc.action.HelloAction">
+			<result>/result.jsp</result>
+			<!-- 使用表达式 -->
+			<result name="add">
+				<param name="location">/${#request.path}.jsp</param>				
+			</result>
+			<result name="update">/{1}.jsp</result>
+		</action>		
+		<!-- <action name="*_*" method="{2}"  class="com.imooc.action.{1}Action">
+			<result>/result.jsp</result>
+			<result name="add">/{2}.jsp</result>
+			<result name="update">/{2}.jsp</result>
+		</action> -->
+		<action name="loginaction" method="Login"  class="com.imooc.action.LoginAction">
+			<result>/success.jsp</result>	
+			<result name="input">/login.jsp</result>		
+		</action>	
+		
+		<!-- 2使用感叹号方式 -->
+		<!-- <action name="hello"  class="com.imooc.action.HelloAction">
+			<result>/result.jsp</result>
+			<result name="add">/add.jsp</result>
+			<result name="update">/update.jsp</result>			
+		</action> -->
+		
+		
+		<!-- 1指定Method属性方式一个Actiond类对应多个访问属性  不建议使用-->
+		<!-- <action name="hello" method="update" class="com.imooc.action.HelloAction">
+			<result>/result.jsp</result>
+		</action>
+		<action name="updateAction" method="update" class="com.imooc.action.HelloAction">
+			<result>/update.jsp</result>
+		</action>
+		<action name="addAction" method="add" class="com.imooc.action.HelloAction">
+			<result>/add.jsp</result>
+		</action> -->
+		
+	</package>
+</struts>
